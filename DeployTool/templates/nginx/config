@@ -1,6 +1,6 @@
-upstream <%= fetch (:web_server_socket) %> {
-  server unix:<%= fetch(:web_server_sock) %> fail_timeout=20;
-}
+# upstream <%= fetch (:web_server_socket) %> {
+#   server unix:<%= fetch(:web_server_sock) %> fail_timeout=20;
+# }
 
 server {
   listen 80;
@@ -24,7 +24,7 @@ server{
   # etag off;
 
   charset utf-8;
-  proxy_intercept_errors on;
+  # proxy_intercept_errors on;
 
   root <%= current_path %>/public;
   client_max_body_size 256m;
@@ -36,18 +36,18 @@ server{
   }
 
   location @web_site {
-    proxy_pass http://<%= fetch (:web_server_socket) %>;
+    # proxy_pass http://<%= fetch (:web_server_socket) %>;
 
-    proxy_redirect off;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    # proxy_redirect off;
+    # proxy_set_header Host $host;
+    # proxy_set_header X-Real-IP $remote_addr;
+    # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
-    proxy_read_timeout 300;
-    proxy_buffer_size 16k;
-    proxy_buffers 32 16k;
+    # proxy_read_timeout 300;
+    # proxy_buffer_size 16k;
+    # proxy_buffers 32 16k;
 
-    proxy_set_header X-Forwarded-Proto $scheme;
+    # proxy_set_header X-Forwarded-Proto $scheme;
   }
 
   location ~ ^/(assets|images|system)/ {

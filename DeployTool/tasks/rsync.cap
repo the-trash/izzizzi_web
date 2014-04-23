@@ -1,0 +1,13 @@
+namespace :rsync do
+  # cap production rsync:files
+  task :files do
+    on roles(:all) do
+      ssh_addr = "#{ Configs.role.app.ssh.user }@#{ Configs.role.app.address }"
+
+      from = "#{ shared_path }/#{ Configs.shared_uploads }"
+      to   = [Configs['app_local_path'], :public].join "/"
+
+      info "rsync -chavzPr #{ ssh_addr }:#{ from } #{ to }"
+    end
+  end
+end

@@ -35,7 +35,7 @@ server{
     try_files $uri /system/maintenance/index.html @web_site;
   }
 
-  location /future-text/tatlin/ {
+  location /future\-text/tatlin/ {
      root <%= current_path %>/public;
   }
 

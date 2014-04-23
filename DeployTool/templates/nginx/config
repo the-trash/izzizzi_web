@@ -31,9 +31,9 @@ server{
 
   error_page 422 500 501 502 503 504 /500.html;
 
-  location / {
-    try_files $uri /system/maintenance/index.html @web_site;
-  }
+  #location / {
+  #  try_files $uri /system/maintenance/index.html @web_site;
+  #}
 
   location /tatlin/tatlin/ {
      root <%= current_path %>/public;

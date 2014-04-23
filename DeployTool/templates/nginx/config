@@ -35,6 +35,10 @@ server{
     try_files $uri /system/maintenance/index.html @web_site;
   }
 
+  location /future-text/tatlin/ {
+     root <%= current_path %>/public;
+  }
+
   location @web_site {
     # proxy_pass http://<%= fetch (:web_server_socket) %>;
 

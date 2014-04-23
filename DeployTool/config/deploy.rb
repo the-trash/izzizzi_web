@@ -66,10 +66,10 @@ set :web_server_err,     "#{ fetch :log_dir }/unicorn.err"
 # ADDOND for linked files
 linked_files_addons  = []
 
-linked_files_addons |= %w[ config/app_config.rb ]                  if theme?
-linked_files_addons |= %w[ config/newrelic.yml ]                   if new_relic?
-linked_files_addons |= %w[ config/initializers/sidekiq.rb ]        if sidekiq?
-linked_files_addons |= %w[ config/schedule.rb config/schedule.rb ] if whenever?
+# linked_files_addons |= %w[ config/app_config.rb ]                  if theme?
+# linked_files_addons |= %w[ config/newrelic.yml ]                   if new_relic?
+# linked_files_addons |= %w[ config/initializers/sidekiq.rb ]        if sidekiq?
+# linked_files_addons |= %w[ config/schedule.rb config/schedule.rb ] if whenever?
 
 if sphinx?
   linked_files_addons |= %w[ config/thinking_sphinx.yml ]
@@ -90,21 +90,21 @@ set :linked_dirs,  %w[ bin log search_index tmp vendor/bundle public/system publ
 before "deploy:check:linked_files", "configs:copy"
 
 # Hooks
-before "rvm:check", "ask_me:ask_me" if RVM_HOOK
+# before "rvm:check", "ask_me:ask_me" if RVM_HOOK
 
-after  "deploy:finished", "deploy:restart"
-after  "deploy:finished", "ts:restart"      if sphinx?
-after  "deploy:finished", "whenever:update" if whenever?
-after  "deploy:finished", "sidekiq:restart" if sidekiq?
+# after  "deploy:finished", "deploy:restart"
+# after  "deploy:finished", "ts:restart"      if sphinx?
+# after  "deploy:finished", "whenever:update" if whenever?
+# after  "deploy:finished", "sidekiq:restart" if sidekiq?
 
 # RAILS MIGRATIONS
-set :migration_role, :app
+# set :migration_role, :app
 
 namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      task! "unicorn:restart" if unicorn?
+      # task! "unicorn:restart" if unicorn?
     end
   end
 
@@ -116,5 +116,5 @@ namespace :deploy do
     end
   end
 
-  after :finishing, 'deploy:cleanup'
+  # after :finishing, 'deploy:cleanup'
 end
